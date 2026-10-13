@@ -1,7 +1,15 @@
 /*
- * Copyright (c) 2024 Tushar Singh Rajput
+ * Copyright (c) 2026 Tushar Singh Rajput
  * SPDX-License-Identifier: Apache-2.0
  */
+
+// All operations are to be performed on falling edge of clock
+// everything is negedge and active low reset
+
+// ui_in[7] used to program the flash using UART @ 115200 fixed speed
+
+// ui_in[3:0] used as input pins for protocol emulation
+// uo_out[3:0] used as output pins for protocol emulation
 
 `default_nettype none
 
