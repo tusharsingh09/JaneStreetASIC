@@ -1,0 +1,104 @@
+#! /usr/bin/vvp
+:ivl_version "12.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/system.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2009.vpi";
+S_0x5db55becd5a0 .scope package, "$unit" "$unit" 2 1;
+ .timescale -9 -12;
+S_0x5db55becd730 .scope module, "CLOCK_DIVIDER_UNIT" "CLOCK_DIVIDER_UNIT" 3 7;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 1 "i_rst";
+    .port_info 1 /INPUT 1 "i_clk";
+    .port_info 2 /INPUT 32 "i_divisor";
+    .port_info 3 /OUTPUT 1 "o_clk";
+L_0x5db55bf1c6f0 .functor BUFZ 1, v0x5db55bf1c110_0, C4<0>, C4<0>, C4<0>;
+v0x5db55bef6530_0 .net *"_ivl_2", 30 0, L_0x5db55bf1c4d0;  1 drivers
+L_0x7ff754fb7018 .functor BUFT 1, C4<0>, C4<0>, C4<0>, C4<0>;
+v0x5db55bf1bd70_0 .net *"_ivl_4", 0 0, L_0x7ff754fb7018;  1 drivers
+o0x7ff7552d8078 .functor BUFZ 1, C4<z>; HiZ drive
+v0x5db55bf1be50_0 .net "i_clk", 0 0, o0x7ff7552d8078;  0 drivers
+o0x7ff7552d80a8 .functor BUFZ 32, C4<zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz>; HiZ drive
+v0x5db55bf1bf20_0 .net "i_divisor", 31 0, o0x7ff7552d80a8;  0 drivers
+o0x7ff7552d80d8 .functor BUFZ 1, C4<z>; HiZ drive
+v0x5db55bf1c000_0 .net "i_rst", 0 0, o0x7ff7552d80d8;  0 drivers
+v0x5db55bf1c110_0 .var "m_clk", 0 0;
+v0x5db55bf1c1d0_0 .var "m_cnt", 31 0;
+v0x5db55bf1c2b0_0 .net "m_half_divisor", 31 0, L_0x5db55bf1c5d0;  1 drivers
+v0x5db55bf1c390_0 .net "o_clk", 0 0, L_0x5db55bf1c6f0;  1 drivers
+E_0x5db55bede730 .event negedge, v0x5db55bf1c000_0, v0x5db55bf1be50_0;
+L_0x5db55bf1c4d0 .part o0x7ff7552d80a8, 1, 31;
+L_0x5db55bf1c5d0 .concat [ 31 1 0 0], L_0x5db55bf1c4d0, L_0x7ff754fb7018;
+    .scope S_0x5db55becd730;
+T_0 ;
+    %wait E_0x5db55bede730;
+    %load/vec4 v0x5db55bf1c000_0;
+    %cmpi/e 0, 0, 1;
+    %jmp/0xz  T_0.0, 4;
+    %pushi/vec4 0, 0, 32;
+    %assign/vec4 v0x5db55bf1c1d0_0, 0;
+    %pushi/vec4 1, 0, 1;
+    %assign/vec4 v0x5db55bf1c110_0, 0;
+    %jmp T_0.1;
+T_0.0 ;
+    %load/vec4 v0x5db55bf1bf20_0;
+    %cmpi/u 1, 0, 32;
+    %flag_or 5, 4;
+    %jmp/0xz  T_0.2, 5;
+    %load/vec4 v0x5db55bf1be50_0;
+    %assign/vec4 v0x5db55bf1c110_0, 0;
+    %pushi/vec4 0, 0, 32;
+    %assign/vec4 v0x5db55bf1c1d0_0, 0;
+    %jmp T_0.3;
+T_0.2 ;
+    %load/vec4 v0x5db55bf1bf20_0;
+    %subi 1, 0, 32;
+    %load/vec4 v0x5db55bf1c1d0_0;
+    %cmp/u;
+    %flag_or 5, 4;
+    %jmp/0xz  T_0.4, 5;
+    %pushi/vec4 0, 0, 32;
+    %assign/vec4 v0x5db55bf1c1d0_0, 0;
+    %load/vec4 v0x5db55bf1c110_0;
+    %inv;
+    %assign/vec4 v0x5db55bf1c110_0, 0;
+    %jmp T_0.5;
+T_0.4 ;
+    %load/vec4 v0x5db55bf1c1d0_0;
+    %load/vec4 v0x5db55bf1c2b0_0;
+    %subi 1, 0, 32;
+    %cmp/e;
+    %jmp/0xz  T_0.6, 4;
+    %load/vec4 v0x5db55bf1c1d0_0;
+    %addi 1, 0, 32;
+    %assign/vec4 v0x5db55bf1c1d0_0, 0;
+    %load/vec4 v0x5db55bf1c110_0;
+    %inv;
+    %assign/vec4 v0x5db55bf1c110_0, 0;
+    %jmp T_0.7;
+T_0.6 ;
+    %load/vec4 v0x5db55bf1c1d0_0;
+    %addi 1, 0, 32;
+    %assign/vec4 v0x5db55bf1c1d0_0, 0;
+T_0.7 ;
+T_0.5 ;
+T_0.3 ;
+T_0.1 ;
+    %jmp T_0;
+    .thread T_0;
+    .scope S_0x5db55becd730;
+T_1 ;
+    %vpi_call/w 3 51 "$dumpfile", "tb_div.fst" {0 0 0};
+    %vpi_call/w 3 52 "$dumpvars", 32'sb00000000000000000000000000000000, S_0x5db55becd730 {0 0 0};
+    %end;
+    .thread T_1;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "-";
+    "/home/asus/projects/JaneStreetASIC/test/clock_unit/../../src/clock_div_unit.v";

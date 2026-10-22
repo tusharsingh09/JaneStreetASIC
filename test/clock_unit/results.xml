@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1792690709" />
+    <testcase name="test_divider" classname="test" file="/home/asus/projects/JaneStreetASIC/test/clock_unit/test.py" lineno="25" time="0.0023546218872070312" sim_time_ns="355000.0" ratio_time="150767306.60186312" />
+  </testsuite>
+</testsuites>

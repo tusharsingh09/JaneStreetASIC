@@ -45,9 +45,12 @@ assign m_half_divisor = i_divisor >> 1;
 assign o_clk = m_clk;
 
 // remove later
+`define DEBUG
+`ifdef DEBUG
 initial begin
     $dumpfile("tb_div.fst");
     $dumpvars(0, CLOCK_DIVIDER_UNIT);
 end
+`endif
 
 endmodule

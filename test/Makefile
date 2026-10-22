@@ -7,7 +7,7 @@ FST ?= -fst # Use more efficient FST format
 TOPLEVEL_LANG ?= verilog
 SRC_DIR = $(PWD)/../src
 PROJECT_SOURCES = *.v
-# PROJECT_SOURCES += $(PWD)/../src/clock_div_unit.v
+PROJECT_SOURCES += /spi/*.v
 
 ifneq ($(GATES),yes)
 

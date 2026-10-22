@@ -1,0 +1,8 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1792690685" />
+    <testcase name="rx_stream_512" classname="test" file="/home/asus/projects/JaneStreetASIC/test/spi/test.py" lineno="54" time="0.3150670528411865" sim_time_ns="1639800.0" ratio_time="5204606.401122372" />
+    <testcase name="rx_aborted_frame" classname="test" file="/home/asus/projects/JaneStreetASIC/test/spi/test.py" lineno="72" time="0.0006892681121826172" sim_time_ns="3600.0" ratio_time="5222931.3040470425" />
+    <testcase name="rx_gaps_between_bytes" classname="test" file="/home/asus/projects/JaneStreetASIC/test/spi/test.py" lineno="86" time="0.018489599227905273" sim_time_ns="142200.0" ratio_time="7690810.290002708" />
+  </testsuite>
+</testsuites>
