@@ -36,7 +36,7 @@ always @(posedge i_sclk or posedge i_cs_n) begin
     end
 end
 
-`define DEBUG
+// `define DEBUG
 `ifdef DEBUG
 
 initial begin
