@@ -18,7 +18,8 @@ reg [15:0] m_data;
 
 always@(posedge i_cs or posedge i_valid) begin
     if(i_cs == 1'b1) begin
-        m_cnt <= 1'b0;    
+        m_cnt <= 1'b0;
+        m_data <= 16'd0;
     end else begin
         m_cnt <= ~m_cnt;
     end
@@ -28,10 +29,21 @@ always@(posedge i_valid) begin
     if(m_cnt == 1'b0) begin // least significant byte (little endian used)
         m_data[7:0] <= i_data;
     end else begin
-        m_data[15:0] <= i_data;
+        m_data[15:8] <= i_data;
     end
 end
 
 assign o_clk = ~m_cnt;
+assign o_data = m_data & (~m_cnt);
+
+`define DEBUG
+`ifdef DEBUG
+
+initial begin
+    $dumpfile("packer.vcd");
+    $dumpvars(0, SPI_PACKER);
+end
+
+`endif
 
 endmodule
