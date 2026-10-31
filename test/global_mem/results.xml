@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1793474049" />
+    <testcase name="test_global_memory_spi" classname="test" file="/home/asus/projects/JaneStreetASIC/test/global_mem/test.py" lineno="16" time="0.12112307548522949" sim_time_ns="65400.0" ratio_time="539946.6595279385" />
+  </testsuite>
+</testsuites>

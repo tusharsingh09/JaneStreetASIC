@@ -50,6 +50,8 @@ async def collect(dut, received):
         await ReadOnly() # let o_data_out settle in the same timestep
         received.append(int(dut.o_data_out.value))
 
+########################################################################
+#################### SPI TEST BENCH ####################################
 
 @cocotb.test()
 async def rx_stream_512(dut):

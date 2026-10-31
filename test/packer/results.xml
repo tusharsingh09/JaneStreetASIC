@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1793303881" />
+    <testcase name="test_spi_packer" classname="test" file="/home/asus/projects/JaneStreetASIC/test/packer/test.py" lineno="4" time="0.0016880035400390625" sim_time_ns="140.0" ratio_time="82938.21468926554" />
+  </testsuite>
+</testsuites>
