@@ -30,7 +30,16 @@ module GLOBAL_MEMORY#(
     output wire [15:0] o_data_por_4, // instructions output for PO0 core
     output wire [15:0] o_data_por_5, // instructions output for PO1 core
     output wire [15:0] o_data_por_6, // instructions output for PO2 core
-    output wire [15:0] o_data_por_7 // instructions output for PO3 core
+    output wire [15:0] o_data_por_7, // instructions output for PO3 core
+
+    output wire [15:0] o_clk_0, // clock unit divider 0
+    output wire [15:0] o_clk_1, // clock unit divider 1
+    output wire [15:0] o_clk_2, // clock unit divider 2
+    output wire [15:0] o_clk_3, // clock unit divider 3
+    output wire [15:0] o_clk_4, // clock unit divider 4
+    output wire [15:0] o_clk_5, // clock unit divider 5
+    output wire [15:0] o_clk_6, // clock unit divider 6
+    output wire [15:0] o_clk_7 // clock unit divider 7
 );
 
 /*
