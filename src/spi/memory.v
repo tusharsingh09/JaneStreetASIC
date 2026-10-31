@@ -2,7 +2,11 @@
 
 // single write port at reset
 // octa port output for each core
-module GLOBAL_MEMORY(
+module GLOBAL_MEMORY#(
+    parameter INSTRUCTION_WORD_SIZE = 16,
+    parameter INSTRUCTION_MEM_WORD_PER_CORE = 32,
+    parameter CLOCK_CONFIG_DIVISOR_SIZE = 32
+)(
     input wire i_w_clk, // clock to write configs and instructions,
     input wire [15:0] i_word, // data to be written,
 
@@ -29,9 +33,11 @@ module GLOBAL_MEMORY(
     output wire [15:0] o_data_por_7 // instructions output for PO3 core
 );
 
-local parameter INSTRUCTION_WORD_SIZE = 16;
-local parameter INSTRUCTION_MEM_SIZE_PER_CORE = 32;
-local parameter CLOCK_CONFIG_DIVISOR_SIZE = 32;
+/*
+localparameter INSTRUCTION_WORD_SIZE = 16;
+localparameter INSTRUCTION_MEM_WORD_PER_CORE = 32;
+localparameter CLOCK_CONFIG_DIVISOR_SIZE = 32;
+*/
 
 // spi vars
 wire [7:0] m_spi_rx_output;
@@ -40,6 +46,18 @@ wire m_spi_output_valid;
 // packer vars
 wire m_packer_o_clk;
 wire [15:0] m_packer_o_data;
+
+// counter for writing into memory
+// max value = 271
+// addresses [0-271]
+// total 272 words
+reg [8:0] m_global_pointer;
+
+// memory array
+// 8 clocks 32bit (2 word each) => 16 words
+// 8 cores 32 instructions (1 words each) 32 * 8 words
+// total 272 words
+reg [INSTRUCTION_WORD_SIZE - 1:0] m_memory [8*(CLOCK_CONFIG_DIVISOR_SIZE/INSTRUCTION_WORD_SIZE + INSTRUCTION_MEM_WORD_PER_CORE)-1:0];
 
 SPI_RX m_spi_rx(
     .i_sclk(i_sclk_mem),
@@ -59,8 +77,28 @@ SPI_PACKER m_spi_packer(
     .o_data(m_packer_o_data)
 );
 
+always@(posedge m_packer_o_clk) begin
+    m_memory[m_global_pointer] <= m_packer_o_data;
 
+    if(m_global_pointer == 9'd271) begin
+        m_global_pointer <= 9'd0;
+    end else begin
+        m_global_pointer <= m_global_pointer + 9'd1;
+    end
+end 
 
-reg [INSTRUCTION_WORD_SIZE - 1:0] m_memory [8*(CLOCK_CONFIG_DIVISOR_SIZE + INSTRUCTION_MEM_SIZE_PER_CORE)-1:0];
+always@(posedge i_cs_mem) begin
+    m_global_pointer <= 10'd0;
+end
+
+`define DEBUG
+`ifdef DEBUG
+
+initial begin
+    $dumpfile("global_mem.fst");
+    $dumpvars(0, GLOBAL_MEMORY);
+end
+
+`endif
 
 endmodule
